@@ -3,12 +3,13 @@ class TagsController < ApplicationController
 
   def index
     tags = Tag.all
-    render json: tags
+    render json: tags.to_json( only: [:name],
+    include: [:posts])
   end
 
   def show
     tag = Tag.find(params[:id])
-    render json: tag
+    render json: tag.to_json(only: [:name], include: [:posts])
   end
 
   private
